@@ -1,6 +1,132 @@
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: "Outfit", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
 
+body {
+  background-color: #DCDBDB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.task-container {
+  background-color: #CED7D2;
+  padding: 1.25rem;
+  border-radius: 0.3125rem;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.40);
+  width: 100%;
+  max-width: 25rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-bottom: 1.25rem;
+}
+
+form input {
+  width: 100%;
+  padding: .6rem;
+  border: .05rem solid black;
+  border-radius: 0.8rem;
+}
+
+form button {
+  padding: 0.625rem;
+  border: .085rem solid black;
+  border-radius: 0.8rem;
+  background-color: darkgreen;
+  color: black;
+  cursor: pointer;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  background-color: white;
+  border-radius: 0.8rem;
+  border: .05rem solid black;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+li span {
+  flex: 1 1 auto;
+  min-width: 50%;
+}
+
+li div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+li button {
+  border: .10rem solid black;
+  cursor: pointer;
+  padding: 0.3125rem 0.625rem;
+  flex: 1 1 auto;
+  text-align: center;
+  margin-top: .8rem;
+}
+
+li button.delete {
+  background-color: red;
+}
+
+li button.edit {
+  background-color: #ffc107;
+}
+
+li button.complete {
+  background-color: green;
+}
+
+li button:hover {
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  form input {
+    width: 75%;
+  }
+
+  form button {
+    width: 20%;
+    margin-left: 0.625rem;
+  }
+
+  li div {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+  }
+
+  li button {
+    flex: none;
+  }
+}

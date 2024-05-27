@@ -16,38 +16,71 @@ document.addEventListener('DOMContentLoaded', () => {
           const li = document.createElement('li');
           li.className = todo.completed ? 'completed' : '';
           li.innerHTML = `
-              <span contenteditable="true">${todo.task}</span>
+              <span>${todo.task}</span>
               <div>
-                  <button class="complete">${todo.completed ? 'Undo' : 'Complete'}</button>
-                  <button class="edit">Edit</button>
-                  <button class="delete">Delete</button>
+                  <button class="complete">${todo.completed ? 'Uncomplete' : 'Complete'}</button>
+                  <button class="edit">${todo.completed ? '' : 'Edit'}</button>
+                  <button class="delete">${todo.completed ? '' : 'Delete'}</button>
               </div>
           `;
           todoList.appendChild(li);
 
-          li.querySelector('.complete').addEventListener('click', () => {
-              todos[index].completed = !todos[index].completed;
+          // Handle task completion or uncompletion
+          li.querySelector('.complete').addEventListener('click', (e) => {
+              e.stopPropagation(); // Prevent event bubbling to parent elements
+              if (todos[index].completed) {
+                  // Uncomplete task
+                  todos[index].completed = false;
+                  li.querySelector('.delete').textContent = 'Delete'; // Change text of delete button
+              } else {
+                  // Complete task
+                  todos[index].completed = true;
+                  li.querySelector('.delete').textContent = ''; // Hide delete button
+              }
               saveTodos(todos);
-              renderTodos();
+              renderTodos(); // Re-render the tasks
           });
 
-          li.querySelector('.edit').addEventListener('click', () => {
-              const newTask = li.querySelector('span').innerText;
-              todos[index].task = newTask;
-              saveTodos(todos);
-              renderTodos();
-          });
+          // Handle task editing
+          const editButton = li.querySelector('.edit');
+          if (!todo.completed) {
+              editButton.addEventListener('click', () => {
+                  const span = li.querySelector('span');
+                  if (span.isContentEditable) {
+                      span.contentEditable = false;
+                      editButton.textContent = 'Edit';
+                      todos[index].task = span.innerText;
+                      saveTodos(todos);
+                  } else {
+                      span.contentEditable = true;
+                      span.focus();
+                      editButton.textContent = 'Save';
+                  }
+              });
+          } else {
+              editButton.style.display = 'none'; // Hide the edit button for completed tasks
+          }
 
-          li.querySelector('.delete').addEventListener('click', () => {
-              todos.splice(index, 1);
-              saveTodos(todos);
-              renderTodos();
-          });
+          // Handle task deletion
+          const deleteButton = li.querySelector('.delete');
+          if (!todo.completed) {
+              deleteButton.addEventListener('click', () => {
+                  todos.splice(index, 1);
+                  saveTodos(todos);
+                  renderTodos(); // Re-render the tasks
+              });
+          } else {
+              deleteButton.style.display = 'none'; // Hide the delete button for completed tasks
+          }
 
+          // Save task on blur
           li.querySelector('span').addEventListener('blur', () => {
-              const newTask = li.querySelector('span').innerText;
-              todos[index].task = newTask;
-              saveTodos(todos);
+              if (editButton.textContent === 'Save') {
+                  const newTask = li.querySelector('span').innerText;
+                  todos[index].task = newTask;
+                  saveTodos(todos);
+                  renderTodos();
+              }
           });
       });
   };
