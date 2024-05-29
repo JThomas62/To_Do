@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-family: "Outfit", sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -27,7 +27,8 @@ body {
   max-width: 25rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 90vh;
+  overflow: hidden;
 }
 
 form {
@@ -93,7 +94,7 @@ li button {
 }
 
 li button.delete {
-  background-color: #ed0000bb;
+  background-color: #ED0000;
 }
 
 li button.edit {
