@@ -50,9 +50,13 @@ form button {
   padding: 0.625rem;
   border: 0.12rem solid #000000;
   border-radius: 0.8rem;
-  background-color: #01B3CC;
+  background-color: #089e08;
   cursor: pointer;
   width: 100%;
+}
+
+form button:hover {
+  background-color: #0f790f;
 }
 
 ul {
@@ -102,7 +106,11 @@ li button.edit {
 }
 
 li button.complete {
-  background-color: #01B3CC;
+  background-color: #089e08;
+}
+
+li button.uncomplete {
+  background-color: #A9A9A9;
 }
 
 li button:hover {
